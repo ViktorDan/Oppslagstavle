@@ -9,8 +9,11 @@ namespace Oppslagstavle.Models
     public class Arrangement : Oppslag
     {
         [Key]
-        private int AID { get; set; }
-        private Boolean Deltagbar { get; set; }
-        private int Deltagere { get; set; }
+        public int AID { get; set; }
+        public Boolean Deltagbar { get; set; }
+        public int Deltagere { get; set; }
+        public string Hvor { get; set; }
+        public string Når { get; set; }
+        public DateTime Dato { get; set; }
     }
 }
