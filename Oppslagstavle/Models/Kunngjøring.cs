@@ -6,10 +6,9 @@ using System.Threading.Tasks;
 
 namespace Oppslagstavle.Models
 {
-    public class Beboer : Bruker    
+    public class Kunngjøring : Oppslag
     {
         [Key]
-        private int BID { get; set; }
-        private List<Arrangement> Arr { get; set; }
+        private int KID { get; set; }
     }
 }
