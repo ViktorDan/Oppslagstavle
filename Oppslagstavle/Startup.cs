@@ -5,6 +5,8 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.SpaServices.AngularCli;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using Oppslagstavle.Models;
+using Microsoft.EntityFrameworkCore;
 
 namespace Oppslagstavle
 {
@@ -27,6 +29,10 @@ namespace Oppslagstavle
             {
                 configuration.RootPath = "ClientApp/dist";
             });
+
+            var connection = @"Server=(localdb)\mssqllocaldb;Database=OppslagstavleDB;Trusted_Connection=True;ConnectRetryCount=0";
+            services.AddDbContext<OppslagstavleContext>
+                (options => options.UseSqlServer(connection));
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
