@@ -1,1 +1,14 @@
-﻿
+#home {
+  padding: 20px;
+}
+
+#knapp {
+  padding: 30px;
+  min-height: 20px;
+}
+
+#knapp2 {
+  padding: 30px;
+  min-height: 20px;
+  margin-left: 25px;
+}
