@@ -5,6 +5,8 @@ using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.EntityFrameworkCore;
 
+// https://docs.microsoft.com/en-us/ef/core/modeling/relationships
+
 namespace Oppslagstavle.Models
 {
     public class OppslagstavleContext : DbContext
@@ -26,19 +28,27 @@ namespace Oppslagstavle.Models
         {
             [Key]
             private int BorettslagId { get; set; }
-            private String Navn { get; set; }
+            private string Navn { get; set; }
             private DateTime Opprettet { get; set; }
+            private List<Bygg> Bygg { get; set; }
 
         }
         public class Bygg
         {
             [Key]
             private int ByggId { get; set; }
-            private Borettslag BorettslagId { get; set; }
+            // Fremmednøkler
+            private int BorettslagId { get; set; }
+            private Borettslag Borettslag { get; set; }
+            private List<Enhet> Enheter { get; set; }
+
         }
         public class Enhet
         {
-
+            // Fremmednøkler
+            private int ByggId { get; set; }
+            private Bygg Bygg { get; set; }
+            private 
         }
         public class Person
         {
