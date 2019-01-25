@@ -45,26 +45,46 @@ namespace Oppslagstavle.Models
         }
         public class Enhet
         {
+            [Key]
+            private int EnhetId { get; set; }
             // Fremmednøkler
             private int ByggId { get; set; }
             private Bygg Bygg { get; set; }
-            private 
-        }
-        public class Person
-        {
-
+            private List<Beboer> Beboere { get; set; }
         }
         public class Beboer
         {
+            [Key]
+            // Fremmednøkler
+            private int PersonId { get; set; }
+            private Person Person { get; set; }
+            private int EnhetId { get; set; }
+            private Enhet Enhet { get; set; }
+        }
+        public class Person
+        {
+            [Key]
+            private int PersonId { get; set; }
+            // Fremmednøkler
 
         }
+        
         public class Styremedlem
         {
-
+            [Key]
+            // Fremmednøkler
+            private int PersonId { get; set; }
+            private Person Person { get; set; }
+            private int OppslagId { get; set; }
+            private Oppslag Oppslag { get; set; }
         }
         public class Oppslag
         {
-
+            [Key]
+            private int OppslagId { get; set; }
+            // Fremmednøkler
+            private int PersonId { get; set; }
+            private Styremedlem Styremedlem { get; set; }
         }
 
     }
