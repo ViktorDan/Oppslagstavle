@@ -1,25 +1,36 @@
-﻿/// <reference path="../../../../node_modules/@types/jasmine/index.d.ts" />
-import { TestBed, async, ComponentFixture, ComponentFixtureAutoDetect } from '@angular/core/testing';
+import { TestBed, async, ComponentFixture, ComponentFixtureAutoDetect, inject, tick, fakeAsync } from '@angular/core/testing';
 import { BrowserModule, By } from "@angular/platform-browser";
 import { HomeComponent } from './home.component';
+import { DebugElement } from '@angular/core';
 
-let component: HomeComponent;
-let fixture: ComponentFixture<HomeComponent>;
 
-describe('home component', () => {
-    beforeEach(async(() => {
-        TestBed.configureTestingModule({
-            declarations: [ HomeComponent ],
-            imports: [ BrowserModule ],
-            providers: [
-                { provide: ComponentFixtureAutoDetect, useValue: true }
-            ]
-        });
-        fixture = TestBed.createComponent(HomeComponent);
-        component = fixture.componentInstance;
-    }));
+describe('HomeComponent', () => {
 
-    it('should do something', async(() => {
-        expect(true).toEqual(true);
-    }));
+  let component: HomeComponent;
+  let fixture: ComponentFixture<HomeComponent>;
+  let de: DebugElement;
+
+
+  beforeEach(async(() => {
+
+    TestBed.configureTestingModule({
+      declarations: [HomeComponent],
+
+    })
+      .compileComponents();
+  }));
+
+  beforeEach(() => {
+
+    fixture = TestBed.createComponent(HomeComponent);
+    component = fixture.componentInstance;
+    de = fixture.debugElement;
+
+    fixture.detectChanges();
+  });
+
+  it('should create', () => {
+    expect(component).toBeTruthy();
+  });
+
 });
