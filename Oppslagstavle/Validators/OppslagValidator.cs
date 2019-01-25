@@ -19,7 +19,7 @@ namespace Oppslagstavle.Validators
                 .NotEmpty()
                 .Matches("^[A-Åa-å0-9 @/._-]{1,900}$")
                 ;
-            RuleFor(o => o.Bilde)
+            RuleFor(o => o.Bilde);
         }
     }
 }
