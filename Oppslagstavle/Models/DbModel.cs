@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.EntityFrameworkCore;
@@ -12,12 +13,48 @@ namespace Oppslagstavle.Models
             : base(options)
         { }
 
-        public DbSet<Bruker> Brukere {get;set;}
+        public DbSet<Borettslag> DB_Borettslag { get; set; }
+        public DbSet<Bygg> DB_Bygg { get; set; }
+        public DbSet<Enhet> DB_Enheter { get; set; }
+        public DbSet<Person> DB_Personer { get; set; }
+        public DbSet<Beboer> DB_Beboere { get; set; }
+        public DbSet<Styremedlem> DB_Styremedlemmer { get; set; }
+        public DbSet<Oppslag> DB_Oppslag { get; set; }
 
-        public class Bruker
+
+        public class Borettslag
         {
-            public int BrukerId { get; set; }
-            public String Navn { get; set; }
+            [Key]
+            private int BorettslagId { get; set; }
+            private String Navn { get; set; }
+            private DateTime Opprettet { get; set; }
+
+        }
+        public class Bygg
+        {
+            [Key]
+            private int ByggId { get; set; }
+            private Borettslag BorettslagId { get; set; }
+        }
+        public class Enhet
+        {
+
+        }
+        public class Person
+        {
+
+        }
+        public class Beboer
+        {
+
+        }
+        public class Styremedlem
+        {
+
+        }
+        public class Oppslag
+        {
+
         }
 
     }
