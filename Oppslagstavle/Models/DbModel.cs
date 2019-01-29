@@ -48,7 +48,7 @@ namespace Oppslagstavle.Models
             // Fremmednøkler
             private int ByggId { get; set; }
             private Bygg Bygg { get; set; }
-            private 
+           
         }
         public class Person
         {
