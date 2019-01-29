@@ -22,69 +22,93 @@ namespace Oppslagstavle.Models
         public DbSet<Beboer> DB_Beboere { get; set; }
         public DbSet<Styremedlem> DB_Styremedlemmer { get; set; }
         public DbSet<Oppslag> DB_Oppslag { get; set; }
+        public DbSet<OppslagIBygg> DB_OppslagIBygg { get; set; }
 
 
         public class Borettslag
         {
             [Key]
-            private int BorettslagId { get; set; }
-            private string Navn { get; set; }
-            private DateTime Opprettet { get; set; }
-            private List<Bygg> Bygg { get; set; }
-
+            public int BorettslagId { get; set; }
+            public string Navn { get; set; }
+            public DateTime Opprettet { get; set; }
+            // Fremmednøkler
+            public List<Bygg> Bygg { get; set; } 
+            public List<Styremedlem> Styremedlemmer { get; set; }
         }
         public class Bygg
         {
             [Key]
-            private int ByggId { get; set; }
+            public int ByggId { get; set; }
+            public int ByggNr { get; set; }
+            public string ByggType { get; set; }
+            public string ByggNavn { get; set; }
             // Fremmednøkler
-            private int BorettslagId { get; set; }
-            private Borettslag Borettslag { get; set; }
-            private List<Enhet> Enheter { get; set; }
+            public int BorettslagId { get; set; }
+            public Borettslag Borettslag { get; set; }
+            public List<Enhet> Enheter { get; set; }
+            public List<OppslagIBygg> OppslagIBygg { get; set; } // ----------------> Peker til OppslagIBygg
 
         }
         public class Enhet
         {
             [Key]
-            private int EnhetId { get; set; }
+            public int EnhetId { get; set; }
             // Fremmednøkler
-            private int ByggId { get; set; }
-            private Bygg Bygg { get; set; }
-            private List<Beboer> Beboere { get; set; }
+            public int ByggId { get; set; }
+            public Bygg Bygg { get; set; }
+            public List<Beboer> Beboere { get; set; }
         }
-        public class Beboer
-        {
-            [Key]
-            // Fremmednøkler
-            private int PersonId { get; set; }
-            private Person Person { get; set; }
-            private int EnhetId { get; set; }
-            private Enhet Enhet { get; set; }
-        }
+       
         public class Person
         {
             [Key]
-            private int PersonId { get; set; }
-            // Fremmednøkler
-
+            public int PersonId { get; set; }
+            public string Fornavn { get; set; }
+            public string Etternavn { get; set; }
+            public string Fulltnavn { get; set; }
+            public string Epost { get; set; }
+            public string Lowercase_Epost { get; set; }
+            public string Tlf { get; set; }
         }
-        
-        public class Styremedlem
+        public class Beboer : Person
         {
-            [Key]
+            public int EnhetId { get; set; }
+            public Enhet Enhet { get; set; }
+        }
+        public class Styremedlem : Person
+        {
+            public bool Styreleder { get; set; }
             // Fremmednøkler
-            private int PersonId { get; set; }
-            private Person Person { get; set; }
-            private int OppslagId { get; set; }
-            private Oppslag Oppslag { get; set; }
+            public int BorettslagId { get; set; }
+            public virtual Borettslag Borettslag { get; set; }
+            public List<Oppslag> Oppslag { get; set; }
         }
         public class Oppslag
         {
             [Key]
-            private int OppslagId { get; set; }
+            public int OppslagId { get; set; }
+            public string Tittel { get; set; }
+            public string Tekst { get; set; }
+            public string Bilde { get; set; }
+            public DateTime StartDato { get; set; }
+            public DateTime SluttDato { get; set; }
+            public string StartTid { get; set; }
+            public string SluttTid { get; set; }
+            public bool Deltakelse { get; set; }
             // Fremmednøkler
-            private int PersonId { get; set; }
-            private Styremedlem Styremedlem { get; set; }
+            public int PersonId { get; set; } // ----------------> Peker til Styremedlem
+            public Styremedlem Styremedlem { get; set; }
+            public List<OppslagIBygg> OppslagIBygg { get; set; } // ----------------> Peker til OppslagIBygg
+        }
+        public class OppslagIBygg
+        {
+            public int OppslagIByggId { get; set; }
+            // Mellom-entitet i mange-til-mange forhold Oppslag og Bygg
+            public int ByggId { get; set; }
+            public Bygg Bygg { get; set; }
+
+            public int OppslagId { get; set; }
+            public Oppslag Oppslag { get; set; }
         }
 
     }
