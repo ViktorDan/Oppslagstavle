@@ -1,0 +1,9 @@
+nav{
+  background-color: aquamarine;
+}
+#myNavbar{
+  margin-left: -25vw;
+}
+li .nav-item{
+  margin-left: 5vw;
+}
