@@ -3,15 +3,17 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Oppslagstavle.Models;
 
 namespace Oppslagstavle.Migrations
 {
     [DbContext(typeof(OppslagstavleContext))]
-    partial class OppslagstavleContextModelSnapshot : ModelSnapshot
+    [Migration("20190131115100_Forhold_Borettslag_Bygg_og_OnDeleteNULL_på_Oppslag")]
+    partial class Forhold_Borettslag_Bygg_og_OnDeleteNULL_på_Oppslag
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -61,13 +63,9 @@ namespace Oppslagstavle.Migrations
                         .ValueGeneratedOnAdd()
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-                    b.Property<int>("ByggId");
-
                     b.Property<int>("EnhetsNr");
 
                     b.HasKey("EnhetId");
-
-                    b.HasIndex("ByggId");
 
                     b.ToTable("DB_Enheter");
                 });
@@ -147,9 +145,6 @@ namespace Oppslagstavle.Migrations
                 {
                     b.HasBaseType("Oppslagstavle.Models.OppslagstavleContext+Person");
 
-                    b.Property<int>("EnhetId");
-
-                    b.HasIndex("EnhetId");
 
                     b.ToTable("Beboer");
 
@@ -179,14 +174,6 @@ namespace Oppslagstavle.Migrations
                         .OnDelete(DeleteBehavior.Cascade);
                 });
 
-            modelBuilder.Entity("Oppslagstavle.Models.OppslagstavleContext+Enhet", b =>
-                {
-                    b.HasOne("Oppslagstavle.Models.OppslagstavleContext+Bygg", "Bygg")
-                        .WithMany("Enheter")
-                        .HasForeignKey("ByggId")
-                        .OnDelete(DeleteBehavior.Cascade);
-                });
-
             modelBuilder.Entity("Oppslagstavle.Models.OppslagstavleContext+Oppslag", b =>
                 {
                     b.HasOne("Oppslagstavle.Models.OppslagstavleContext+Styremedlem", "Styremedlem")
@@ -205,13 +192,6 @@ namespace Oppslagstavle.Migrations
                         .WithMany("OppslagIBygg")
                         .HasForeignKey("OppslagId")
                         .OnDelete(DeleteBehavior.Cascade);
-                });
-
-            modelBuilder.Entity("Oppslagstavle.Models.OppslagstavleContext+Beboer", b =>
-                {
-                    b.HasOne("Oppslagstavle.Models.OppslagstavleContext+Enhet", "Enhet")
-                        .WithMany("Beboere")
-                        .HasForeignKey("EnhetId");
                 });
 
             modelBuilder.Entity("Oppslagstavle.Models.OppslagstavleContext+Styremedlem", b =>

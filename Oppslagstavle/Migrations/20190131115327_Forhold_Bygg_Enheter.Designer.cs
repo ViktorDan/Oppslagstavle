@@ -3,15 +3,17 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Oppslagstavle.Models;
 
 namespace Oppslagstavle.Migrations
 {
     [DbContext(typeof(OppslagstavleContext))]
-    partial class OppslagstavleContextModelSnapshot : ModelSnapshot
+    [Migration("20190131115327_Forhold_Bygg_Enheter")]
+    partial class Forhold_Bygg_Enheter
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -147,9 +149,6 @@ namespace Oppslagstavle.Migrations
                 {
                     b.HasBaseType("Oppslagstavle.Models.OppslagstavleContext+Person");
 
-                    b.Property<int>("EnhetId");
-
-                    b.HasIndex("EnhetId");
 
                     b.ToTable("Beboer");
 
@@ -205,13 +204,6 @@ namespace Oppslagstavle.Migrations
                         .WithMany("OppslagIBygg")
                         .HasForeignKey("OppslagId")
                         .OnDelete(DeleteBehavior.Cascade);
-                });
-
-            modelBuilder.Entity("Oppslagstavle.Models.OppslagstavleContext+Beboer", b =>
-                {
-                    b.HasOne("Oppslagstavle.Models.OppslagstavleContext+Enhet", "Enhet")
-                        .WithMany("Beboere")
-                        .HasForeignKey("EnhetId");
                 });
 
             modelBuilder.Entity("Oppslagstavle.Models.OppslagstavleContext+Styremedlem", b =>

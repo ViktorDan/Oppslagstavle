@@ -3,15 +3,17 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Oppslagstavle.Models;
 
 namespace Oppslagstavle.Migrations
 {
     [DbContext(typeof(OppslagstavleContext))]
-    partial class OppslagstavleContextModelSnapshot : ModelSnapshot
+    [Migration("20190131113927_Forhold_Styremedlem_Borettslag")]
+    partial class Forhold_Styremedlem_Borettslag
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -40,8 +42,6 @@ namespace Oppslagstavle.Migrations
                         .ValueGeneratedOnAdd()
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-                    b.Property<int>("BorettslagId");
-
                     b.Property<string>("ByggNavn");
 
                     b.Property<int>("ByggNr");
@@ -49,8 +49,6 @@ namespace Oppslagstavle.Migrations
                     b.Property<string>("ByggType");
 
                     b.HasKey("ByggId");
-
-                    b.HasIndex("BorettslagId");
 
                     b.ToTable("DB_Bygg");
                 });
@@ -61,13 +59,9 @@ namespace Oppslagstavle.Migrations
                         .ValueGeneratedOnAdd()
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-                    b.Property<int>("ByggId");
-
                     b.Property<int>("EnhetsNr");
 
                     b.HasKey("EnhetId");
-
-                    b.HasIndex("ByggId");
 
                     b.ToTable("DB_Enheter");
                 });
@@ -147,9 +141,6 @@ namespace Oppslagstavle.Migrations
                 {
                     b.HasBaseType("Oppslagstavle.Models.OppslagstavleContext+Person");
 
-                    b.Property<int>("EnhetId");
-
-                    b.HasIndex("EnhetId");
 
                     b.ToTable("Beboer");
 
@@ -171,27 +162,12 @@ namespace Oppslagstavle.Migrations
                     b.HasDiscriminator().HasValue(2);
                 });
 
-            modelBuilder.Entity("Oppslagstavle.Models.OppslagstavleContext+Bygg", b =>
-                {
-                    b.HasOne("Oppslagstavle.Models.OppslagstavleContext+Borettslag", "Borettslag")
-                        .WithMany("Bygg")
-                        .HasForeignKey("BorettslagId")
-                        .OnDelete(DeleteBehavior.Cascade);
-                });
-
-            modelBuilder.Entity("Oppslagstavle.Models.OppslagstavleContext+Enhet", b =>
-                {
-                    b.HasOne("Oppslagstavle.Models.OppslagstavleContext+Bygg", "Bygg")
-                        .WithMany("Enheter")
-                        .HasForeignKey("ByggId")
-                        .OnDelete(DeleteBehavior.Cascade);
-                });
-
             modelBuilder.Entity("Oppslagstavle.Models.OppslagstavleContext+Oppslag", b =>
                 {
                     b.HasOne("Oppslagstavle.Models.OppslagstavleContext+Styremedlem", "Styremedlem")
                         .WithMany("Oppslag")
-                        .HasForeignKey("PersonId");
+                        .HasForeignKey("PersonId")
+                        .OnDelete(DeleteBehavior.Cascade);
                 });
 
             modelBuilder.Entity("Oppslagstavle.Models.OppslagstavleContext+OppslagIBygg", b =>
@@ -205,13 +181,6 @@ namespace Oppslagstavle.Migrations
                         .WithMany("OppslagIBygg")
                         .HasForeignKey("OppslagId")
                         .OnDelete(DeleteBehavior.Cascade);
-                });
-
-            modelBuilder.Entity("Oppslagstavle.Models.OppslagstavleContext+Beboer", b =>
-                {
-                    b.HasOne("Oppslagstavle.Models.OppslagstavleContext+Enhet", "Enhet")
-                        .WithMany("Beboere")
-                        .HasForeignKey("EnhetId");
                 });
 
             modelBuilder.Entity("Oppslagstavle.Models.OppslagstavleContext+Styremedlem", b =>
