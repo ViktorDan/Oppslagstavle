@@ -31,6 +31,7 @@ namespace Oppslagstavle
             });
 
             var connection = @"Server=(localdb)\mssqllocaldb;Database=OppslagstavleDB;Trusted_Connection=True;ConnectRetryCount=0";
+
             services.AddDbContext<OppslagstavleContext>
                 (options => options.UseSqlServer(connection));
         }
