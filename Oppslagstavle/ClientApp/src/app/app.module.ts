@@ -9,8 +9,10 @@ import { AppComponent } from './app.component';
 import { HomeComponent } from './home/home.component';
 import { BeboerComponent } from './beboer/beboer.component';
 import { StyretComponent } from './styret/styret.component';
-import { NavbarComponent } from './navbar/navbar.component';
+import { NavbarComponent } from './beboer/navbar/navbar.component';
 import { AktiveOppslagComponent } from './beboer/aktive-oppslag/aktive-oppslag.component';
+import { AppRoutingModule } from './app-routing.module';
+import { ArkivComponent } from './beboer/arkiv/arkiv.component';
 
 @NgModule({
   declarations: [
@@ -19,7 +21,8 @@ import { AktiveOppslagComponent } from './beboer/aktive-oppslag/aktive-oppslag.c
     BeboerComponent,
     StyretComponent,
     NavbarComponent,
-    AktiveOppslagComponent
+    AktiveOppslagComponent,
+    ArkivComponent
   ],
   imports: [
     BrowserModule,
@@ -27,12 +30,7 @@ import { AktiveOppslagComponent } from './beboer/aktive-oppslag/aktive-oppslag.c
     JsonpModule,
     FormsModule,
     ReactiveFormsModule,
-    RouterModule.forRoot([
-
-      { path: '', component: HomeComponent, pathMatch: 'full' },
-      { path: 'beboer', component: BeboerComponent },
-      { path: 'styret', component: StyretComponent }
-    ]) 
+    AppRoutingModule 
   ],
   providers: [],
   bootstrap: [AppComponent]

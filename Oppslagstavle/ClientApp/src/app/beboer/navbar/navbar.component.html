@@ -2,7 +2,7 @@
 <nav class="navbar navbar-expand-lg navbar-light">
   <div class="d-flex flex-grow-1">
     <span class="w-100 d-lg-none d-block"><!-- hidden spacer to center brand on mobile --></span>
-    <a class="navbar-brand d-none d-lg-inline-block" href="#">
+    <a [routerLink]='["/beboer/aktive"]' class="navbar-brand d-none d-lg-inline-block">
       Boretslag logo
     </a>
     <a class="navbar-brand-two mx-auto d-lg-none d-inline-block" href="#">
@@ -17,13 +17,10 @@
   <div class="collapse navbar-collapse flex-grow-1 " id="myNavbar">
     <ul class="navbar-nav ml-auto flex-nowrap">
       <li class="nav-item">
-        <a href="#" class="nav-link ml-5 mr-5 menu-item nav-active">Nytt innlegg</a>
+        <a [routerLink]='["/beboer/aktive"]' class="nav-link ml-5 mr-5 menu-item">Aktive oppslag</a>
       </li>
       <li class="nav-item">
-        <a href="#" class="nav-link ml-5 mr-5 menu-item">Aktive oppslag</a>
-      </li>
-      <li class="nav-item">
-        <a href="#" class="nav-link ml-5 mr-5 menu-item">Arkiv</a>
+        <a [routerLink]='["/beboer/arkiv"]' class="nav-link ml-5 mr-5 menu-item">Arkiv</a>
       </li>
       <li class="nav-item">
         <a href="#" class="nav-link ml-5 mr-5 menu-item">instillinger</a>

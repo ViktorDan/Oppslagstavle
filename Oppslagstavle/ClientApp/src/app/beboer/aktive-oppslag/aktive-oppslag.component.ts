@@ -11,5 +11,5 @@ export class AktiveOppslagComponent implements OnInit {
 
   ngOnInit() {
   }
-
+  today = new Date();
 }
