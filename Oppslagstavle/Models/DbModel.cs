@@ -11,6 +11,12 @@ using Microsoft.EntityFrameworkCore;
 // ***************** Dette for å unngå Cascade cycles som gjør det umulig å opprette relations. ***************** //
 // Se ER-Diagram for forklaring på databasen.
 
+// DbModel struktur:
+// - DbContext.
+// - DbSet.
+// - ModelBuilder - Primærnøkler, Relasjoner, Seeding.
+// - DbModels - Borettslag, Bygg, Enhet, Person, Beboer, Styremedlem, Oppslag, OppslagIBygg.
+
 namespace Oppslagstavle.Models
 {
     public class OppslagstavleContext : DbContext
@@ -92,40 +98,55 @@ namespace Oppslagstavle.Models
 
             // Seed - Legge inn dummydata
             modelBuilder.Entity<Beboer>().HasData(
-                new Beboer
-                {
-                    PersonId = 1,
-                    Fornavn = "Donald",
-                    Etternavn = "Trump",
-                    Fulltnavn = "Donald Trump",
-                    Epost ="Donald.Trump@gov.com",
-                    Lowercase_Epost = "donald.trump@gov.com",
-                    Tlf = "12121212",
-                    EnhetId = 1
-                });
+                new Beboer {PersonId = 1, Fornavn = "Donald", Etternavn = "Trump",Fulltnavn = "Donald Trump", Epost = "Donald.Trump@gov.com", Lowercase_Epost = "donald.trump@gov.com", Tlf = "12121212", EnhetId = 1 },
+                new Beboer { PersonId = 7, Fornavn = "Hillary", Etternavn = "Clinton", Fulltnavn = "Hillary Clinton", Epost = "Hillary.Clinton@gov.com", Lowercase_Epost = "hillary.clinton@gov.com", Tlf = "17161514", EnhetId = 1 },
+                new Beboer { PersonId = 8, Fornavn = "Cheesy", Etternavn = "McSteak", Fulltnavn = "Cheesy McSteak", Epost = "Cheesy.McSteak@Mccern.no", Lowercase_Epost = "cheesy.mcsteak@mccern.no", Tlf = "25252525", EnhetId = 2 },
+                new Beboer { PersonId = 9, Fornavn = "Chicken", Etternavn = "McSalsa", Fulltnavn = "Chicken McSalsa", Epost = "Chicken.McSalsa@Mccern.no", Lowercase_Epost = "chicken.mcsalsa@mccern.no", Tlf = "25252525", EnhetId = 3 },
+                new Beboer { PersonId = 10, Fornavn = "Big", Etternavn = "McBigmac", Fulltnavn = "Big McBigmac", Epost = "Big.McBigmac@Mccern.no", Lowercase_Epost = "big.mcbigmac@mccern.no", Tlf = "25252525", EnhetId = 4 },
+                new Beboer { PersonId = 11, Fornavn = "Quarter", Etternavn = "Pounder", Fulltnavn = "Quarter Pounder", Epost = "Quarter.Pounder@Mccern.no", Lowercase_Epost = "quarter.pounder@mccern.no", Tlf = "25252525", EnhetId = 5 }
+                );
             modelBuilder.Entity<Enhet>().HasData(
-                new Enhet
-                {
-                    EnhetId = 1,
-                    EnhetsNr = 3,
-                    ByggId = 1
-                });
+                new Enhet { EnhetId = 1, EnhetsNr = 3, ByggId = 1 },
+                new Enhet { EnhetId = 2, EnhetsNr = 30, ByggId = 1 },
+                new Enhet { EnhetId = 3, EnhetsNr = 500, ByggId = 1 },
+                new Enhet { EnhetId = 4, EnhetsNr = 1, ByggId = 2 },
+                new Enhet { EnhetId = 5, EnhetsNr = 90, ByggId = 2 }
+                );
             modelBuilder.Entity<Bygg>().HasData(
-                new Bygg
-                {
-                    ByggId = 1,
-                    ByggNr = 1,
-                    ByggType = "Blokk",
-                    ByggNavn = "A",
-                    BorettslagId = 1
-                });
+                new Bygg { ByggId = 1, ByggNr = 1, ByggType = "Blokk", ByggNavn = "A", BorettslagId = 1 },
+                new Bygg { ByggId = 2, ByggNr = 2, ByggType = "Rekkehus", ByggNavn = "B", BorettslagId = 1 },
+                new Bygg { ByggId = 3, ByggNr = 3, ByggType = "Blokk", ByggNavn = "C", BorettslagId = 2 }
+                );
             modelBuilder.Entity<Borettslag>().HasData(
-                new Borettslag
-                {
-                    BorettslagId = 1,
-                    Navn = "The White House",
-                    DatoOpprettet = new DateTime(2018,01,31,22,12,00)
-                });
+                new Borettslag { BorettslagId = 1, Navn = "The White House", DatoOpprettet = new DateTime(2018,01,31,22,12,00) },
+                new Borettslag { BorettslagId = 2, Navn = "McDonalds", DatoOpprettet = new DateTime(2018,01,31,22,12,00) }
+                );
+            modelBuilder.Entity<Styremedlem>().HasData(
+                new Styremedlem { PersonId = 2, Styreleder = true, Fornavn = "Donald", Etternavn = "Duck", Fulltnavn = "Donald Duck", Epost = "Donald.Duck@andebymail.ab", Lowercase_Epost = "donald.duck@andebymail.ab", Tlf = "12345678", BorettslagId = 1 },
+                new Styremedlem { PersonId = 3, Styreleder = false, Fornavn = "Elvis", Etternavn = "Presley", Fulltnavn = "Elvis Presley", Epost = "Elvis.Presley@kentucky.us", Lowercase_Epost = "elvis.presley@kentucky.us", Tlf = "12131415", BorettslagId = 1 },
+                new Styremedlem { PersonId = 4, Styreleder = false, Fornavn = "Skrue", Etternavn = "McDuck", Fulltnavn = "Skrue McDuck", Epost = "Skrue.McDuck@andebymail.ab", Lowercase_Epost = "skrue.mcduck@andebymail.ab", Tlf = "65748392", BorettslagId = 1 },
+                new Styremedlem { PersonId = 5, Styreleder = false, Fornavn = "Ole", Etternavn = "Olsen", Fulltnavn = "Ole Olsen", Epost = "Ole.Olsen@Olsenmail.ole", Lowercase_Epost = "ole.olsen@olsenmail.ole", Tlf = "90182039", BorettslagId = 2 },
+                new Styremedlem { PersonId = 6, Styreleder = true, Fornavn = "Gunnar", Etternavn = "Solstad", Fulltnavn = "Gunnar Solstad", Epost = "Gunnar.Solstad@norgemail.no", Lowercase_Epost = "gunnar.solstad@norgemail.no", Tlf = "25252525", BorettslagId = 2 }
+                );
+            modelBuilder.Entity<Oppslag>().HasData(
+                new Oppslag { OppslagId = 1, Tittel = "Søppel i oppgang", Tekst = "Nå er det noen som har lagt igjen søppel i oppgangen flere ganger. Dette er ikke tillatt da det lukter søppel i hele oppgangen. Når man tar søpla ut av døra skal man gå hele veien ut døra og kaste søpla i søppeldunkene! Mvh Styret",
+                Bilde = "URL", StartDato = new DateTime(2018, 01, 31, 22, 12, 00), SluttDato = new DateTime(2018, 01, 31, 22, 12, 00), StartTid = "14:00", SluttTid = "15:00", Deltakelse = true, PersonId = 2 },
+                new Oppslag { OppslagId = 2, Tittel = "Hund og katt", Tekst = "Det er ikke tillatt med dyrehold i Borettslaget! Skal du ha kjæledyr, vennligst flytt. Mvh Styret",
+                Bilde = "URL", StartDato = new DateTime(2018, 01, 31, 22, 12, 00), SluttDato = new DateTime(2018, 01, 31, 22, 12, 00), StartTid = "14:00", SluttTid = "15:00", Deltakelse = true, PersonId = 3 },
+                new Oppslag { OppslagId = 3, Tittel = "Sommerfest", Tekst = "Nå er det tid for sommerfest! Dette vil foregå i bakgården hvor det er to stk grill tilgjengelig. Ta med mat og drikke og godt humør! Mvh Styret",
+                Bilde = "URL", StartDato = new DateTime(2018, 01, 31, 22, 12, 00), SluttDato = new DateTime(2018, 01, 31, 22, 12, 00), StartTid = "14:00", SluttTid = "15:00", Deltakelse = true, PersonId = 4 },
+                new Oppslag { OppslagId = 4, Tittel = "Ny dato for søppeltømming", Tekst = "Styret har fått mail fra kommunen om at søppeltømming vil skje på mandager fra nå av. Mvh Styret",
+                Bilde = "URL", StartDato = new DateTime(2018, 01, 31, 22, 12, 00), SluttDato = new DateTime(2018, 01, 31, 22, 12, 00), StartTid = "14:00", SluttTid = "15:00", Deltakelse = true, PersonId = 3 },
+                new Oppslag { OppslagId = 5, Tittel = "Lukk porten etter dere", Tekst = "Det har oppstått et problem med porten vår som gjør at den ikke lukker seg ordentlig. Vi ber derfor våre beboere om å se til at porten går ordentlig igjen etter seg slik at ikke uvedkommende får adgang. Mvh Styret",
+                Bilde = "URL", StartDato = new DateTime(2018, 01, 31, 22, 12, 00), SluttDato = new DateTime(2018, 01, 31, 22, 12, 00), StartTid = "14:00", SluttTid = "15:00", Deltakelse = true, PersonId = 3 }
+                );
+            modelBuilder.Entity<OppslagIBygg>().HasData(
+                new OppslagIBygg { ByggId = 1, OppslagId = 2 },
+                new OppslagIBygg { ByggId = 2, OppslagId = 1 },
+                new OppslagIBygg { ByggId = 1, OppslagId = 3 },
+                new OppslagIBygg { ByggId = 1, OppslagId = 4 },
+                new OppslagIBygg { ByggId = 2, OppslagId = 5 }
+                );
         }
 
         public class Borettslag

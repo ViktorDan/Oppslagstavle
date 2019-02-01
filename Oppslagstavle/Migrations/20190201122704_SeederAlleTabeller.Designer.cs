@@ -3,15 +3,17 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Oppslagstavle.Models;
 
 namespace Oppslagstavle.Migrations
 {
     [DbContext(typeof(OppslagstavleContext))]
-    partial class OppslagstavleContextModelSnapshot : ModelSnapshot
+    [Migration("20190201122704_SeederAlleTabeller")]
+    partial class SeederAlleTabeller
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -141,14 +143,6 @@ namespace Oppslagstavle.Migrations
                     b.HasIndex("OppslagId");
 
                     b.ToTable("DB_OppslagIBygg");
-
-                    b.HasData(
-                        new { ByggId = 1, OppslagId = 2 },
-                        new { ByggId = 2, OppslagId = 1 },
-                        new { ByggId = 1, OppslagId = 3 },
-                        new { ByggId = 1, OppslagId = 4 },
-                        new { ByggId = 2, OppslagId = 5 }
-                    );
                 });
 
             modelBuilder.Entity("Oppslagstavle.Models.OppslagstavleContext+Person", b =>
