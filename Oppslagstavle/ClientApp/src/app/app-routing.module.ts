@@ -1,7 +1,7 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { BeboerRoutingModule } from './beboer/beboer-routing.module';
-import { AktiveOppslagComponent } from './beboer/aktive-oppslag/aktive-oppslag.component';
+import { StyretRoutingModule } from './styret/styret-routing.module';
 import { HomeComponent } from './home/home.component';
 import { StyretComponent } from './styret/styret.component';
 import { BeboerComponent } from './beboer/beboer.component';
@@ -15,7 +15,8 @@ export const routes: Routes = [
 @NgModule({
   imports: [
     RouterModule.forRoot(routes),
-    BeboerRoutingModule
+    BeboerRoutingModule,
+    StyretRoutingModule
   ],
   exports: [RouterModule],
   
