@@ -6,8 +6,9 @@ import { HomeComponent } from './home/home.component';
 import { StyretComponent } from './styret/styret.component';
 import { BeboerComponent } from './beboer/beboer.component';
 
-const routes: Routes = [
-  { path: '', component: HomeComponent, pathMatch: 'full' },
+export const routes: Routes = [
+  { path: '', redirectTo: 'home', pathMatch: 'full' },
+  { path: 'home', component: HomeComponent },
   { path: 'styret', component: StyretComponent },
   { path: 'beboer', component: BeboerComponent },
 ];
