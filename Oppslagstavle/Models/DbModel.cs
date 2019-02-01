@@ -89,13 +89,50 @@ namespace Oppslagstavle.Models
                 .WithMany(b => b.Beboere)
                 .HasForeignKey(p => p.EnhetId)
                 .OnDelete(DeleteBehavior.ClientSetNull);
+
+            // Seed - Legge inn dummydata
+            modelBuilder.Entity<Beboer>().HasData(
+                new Beboer
+                {
+                    PersonId = 1,
+                    Fornavn = "Donald",
+                    Etternavn = "Trump",
+                    Fulltnavn = "Donald Trump",
+                    Epost ="Donald.Trump@gov.com",
+                    Lowercase_Epost = "donald.trump@gov.com",
+                    Tlf = "12121212",
+                    EnhetId = 1
+                });
+            modelBuilder.Entity<Enhet>().HasData(
+                new Enhet
+                {
+                    EnhetId = 1,
+                    EnhetsNr = 3,
+                    ByggId = 1
+                });
+            modelBuilder.Entity<Bygg>().HasData(
+                new Bygg
+                {
+                    ByggId = 1,
+                    ByggNr = 1,
+                    ByggType = "Blokk",
+                    ByggNavn = "A",
+                    BorettslagId = 1
+                });
+            modelBuilder.Entity<Borettslag>().HasData(
+                new Borettslag
+                {
+                    BorettslagId = 1,
+                    Navn = "The White House",
+                    DatoOpprettet = new DateTime(2018,01,31,22,12,00)
+                });
         }
 
         public class Borettslag
         {
             public int BorettslagId { get; set; }
             public string Navn { get; set; }
-            public DateTime Opprettet { get; set; }
+            public DateTime DatoOpprettet { get; set; }
             // Relasjoner
             public List<Bygg> Bygg { get; set; }
             public List<Styremedlem> Styremedlemmer { get; set; }
