@@ -147,7 +147,8 @@ namespace Oppslagstavle.Migrations
                         new { ByggId = 2, OppslagId = 1 },
                         new { ByggId = 1, OppslagId = 3 },
                         new { ByggId = 1, OppslagId = 4 },
-                        new { ByggId = 2, OppslagId = 5 }
+                        new { ByggId = 2, OppslagId = 5 },
+                        new { ByggId = 1, OppslagId = 5 }
                     );
                 });
 

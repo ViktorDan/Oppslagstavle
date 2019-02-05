@@ -23,7 +23,9 @@ namespace Oppslagstavle.Models
     {
         public OppslagstavleContext(DbContextOptions<OppslagstavleContext> options)
             : base(options)
-        { }
+        {}
+
+        
 
         // Oppretter entiter i databasen slik at det kan gjøres CRUD actions mot dem. Person er ikke med her.
         public DbSet<Borettslag> DB_Borettslag { get; set; }
@@ -145,7 +147,8 @@ namespace Oppslagstavle.Models
                 new OppslagIBygg { ByggId = 2, OppslagId = 1 },
                 new OppslagIBygg { ByggId = 1, OppslagId = 3 },
                 new OppslagIBygg { ByggId = 1, OppslagId = 4 },
-                new OppslagIBygg { ByggId = 2, OppslagId = 5 }
+                new OppslagIBygg { ByggId = 2, OppslagId = 5 },
+                new OppslagIBygg { ByggId = 1, OppslagId = 5 }
                 );
         }
 
